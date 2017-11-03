@@ -1,4 +1,4 @@
-package controller;
+package controller.api;
 
 /**
  * Server API docs
