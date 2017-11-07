@@ -1,5 +1,7 @@
 package sender.model;
 
+import java.util.Objects;
+
 /**
  * Address book is an object consisting of:
  * [id] — The ID
@@ -9,7 +11,7 @@ package sender.model;
  * [creationdate] => Created date
  * [description] => Description
  */
-public class Addressbook {
+public class Addressbook implements Comparable<Addressbook> {
     private int id;
     private String name;
     private int phones;
@@ -83,6 +85,29 @@ public class Addressbook {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Addressbook that = (Addressbook) o;
+        return id == that.id &&
+                phones == that.phones &&
+                exceptions == that.exceptions &&
+                Objects.equals(name, that.name) &&
+                Objects.equals(creationdate, that.creationdate) &&
+                Objects.equals(description, that.description);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, phones, exceptions, creationdate, description);
+    }
+
+    @Override
+    public int compareTo(Addressbook addressbook) {
+        return Integer.compare(id, addressbook.getId());
     }
 
     @Override
