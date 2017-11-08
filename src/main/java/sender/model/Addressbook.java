@@ -12,7 +12,7 @@ import java.util.Objects;
  * [description] => Description
  */
 public class Addressbook implements Comparable<Addressbook> {
-    private int id;
+    private long id;
     private String name;
     private int phones;
     private int exceptions;
@@ -22,7 +22,7 @@ public class Addressbook implements Comparable<Addressbook> {
     public Addressbook() {
     }
 
-    public Addressbook(int id, String name, int phones, String creationdate, String description) {
+    public Addressbook(long id, String name, int phones, String creationdate, String description) {
         this.id = id;
         this.name = name;
         this.phones = phones;
@@ -30,7 +30,7 @@ public class Addressbook implements Comparable<Addressbook> {
         this.description = description;
     }
 
-    public Addressbook(int id, String name, int phones, int exceptions, String creationdate, String description) {
+    public Addressbook(long id, String name, int phones, int exceptions, String creationdate, String description) {
         this.id = id;
         this.name = name;
         this.phones = phones;
@@ -39,7 +39,7 @@ public class Addressbook implements Comparable<Addressbook> {
         this.description = description;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -107,7 +107,7 @@ public class Addressbook implements Comparable<Addressbook> {
 
     @Override
     public int compareTo(Addressbook addressbook) {
-        return Integer.compare(id, addressbook.getId());
+        return Long.compare(id, addressbook.getId());
     }
 
     @Override

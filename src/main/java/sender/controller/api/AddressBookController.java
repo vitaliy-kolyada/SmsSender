@@ -46,7 +46,7 @@ public class AddressBookController {
      * Request example: URL
      * @link :http://api.myatompark.com/sms/3.0/addAddressbook?key=public_key&sum=control_sum&name=BOOK_NAME&description=BOOK_DESCRIPTION
      */
-    public int addAddressbook(String name, String description) {
+    public long addAddressbook(String name, String description) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> request = new HttpEntity<>("");
 
@@ -66,7 +66,7 @@ public class AddressBookController {
         // Parsing response
         String[] strings = responseBody.split("\n");
         String[] res = strings[2].split(":");
-        return new Integer(res[1]);
+        return new Long(res[1]);
     }
 
     /**
@@ -76,15 +76,15 @@ public class AddressBookController {
      * Request example: URL
      * @link URL:http://api.myatompark.com/sms/3.0/delAddressbook?key=public_key&sum=control_sum&idAddressBook=21619
      */
-    public boolean delAddressbook(int idAddressBook) {
+    public boolean delAddressbook(long idAddressBook) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> request = new HttpEntity<>("");
 
         // Forming request URL
         String apiUrl = ADDRESS.getAddress() + "delAddressbook?"
                 + "key=" + applicationUser.getPublicKey() + "&"
-                + "sum=" + Utils.getCheckSum(applicationUser.getPrivateKey(), "3.0", "delAddressbook", applicationUser.getPublicKey(), Integer.toString(idAddressBook)) + "&"
-                + "idAddressbook=" + Integer.toString(idAddressBook);
+                + "sum=" + Utils.getCheckSum(applicationUser.getPrivateKey(), "3.0", "delAddressbook", applicationUser.getPublicKey(), Long.toString(idAddressBook)) + "&"
+                + "idAddressbook=" + Long.toString(idAddressBook);
 
         ResponseEntity<String> response = restTemplate.exchange(apiUrl, HttpMethod.POST, request, String.class);
         String responseBody = response.getBody();
@@ -104,15 +104,15 @@ public class AddressBookController {
      * Request example: URL
      * @link http://api.myatompark.com/sms/3.0/editAddressbook?key=public_key&sum=control_sum&idAddressBook=21619&newName=name&newDescr=descr
      */
-    public boolean editAddressbook(int idAddressBook, String newName, String newDescr) {
+    public boolean editAddressbook(long idAddressBook, String newName, String newDescr) {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> request = new HttpEntity<>("");
 
         // Forming request URL
         String apiUrl = ADDRESS.getAddress() + "editAddressbook?"
                 + "key=" + applicationUser.getPublicKey() + "&"
-                + "sum=" + Utils.getCheckSum(applicationUser.getPrivateKey(), "3.0", "editAddressbook", applicationUser.getPublicKey(), Integer.toString(idAddressBook), newName, newDescr) + "&"
-                + "idAddressbook=" + Integer.toString(idAddressBook) + "&"
+                + "sum=" + Utils.getCheckSum(applicationUser.getPrivateKey(), "3.0", "editAddressbook", applicationUser.getPublicKey(), Long.toString(idAddressBook), newName, newDescr) + "&"
+                + "idAddressbook=" + Long.toString(idAddressBook) + "&"
                 + "newName=" + newName + "&"
                 + "newDescr=" + newDescr;
 
@@ -182,7 +182,7 @@ public class AddressBookController {
      * @link http://api.myatompark.com/sms/3.0/getAddressbook?key=public_key&sum=control_sum
      */
     @SuppressWarnings("unchecked")
-    public List getAllAdressbook() {
+    public List<Addressbook> getAllAddressbook() {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<String> request = new HttpEntity<>("");
 
@@ -211,7 +211,7 @@ public class AddressBookController {
         HttpEntity<String> request = new HttpEntity<>("");
 
         // Forming request URL
-        String apiUrl = ADDRESS.getAddress() + "addAddressbook?"
+        String apiUrl = ADDRESS.getAddress() + "cloneaddressbook?"
                 + "key=" + applicationUser.getPublicKey() + "&"
                 + "sum=" + Utils.getCheckSum(applicationUser.getPrivateKey(), "3.0", "addAddressbook", applicationUser.getPublicKey(), Integer.toString(idAddressBook)) + "&"
                 + "idAddressBook=" + Integer.toString(idAddressBook);
